@@ -93,8 +93,9 @@ function App() {
     }
   }
 
-  function togglePop() {
-    
+  function toggleContinue() {
+    setIsSubmitted(true)
+    setIsAuthenticated(false)
    };
 
   // Generate JSX code for error message
@@ -131,10 +132,35 @@ function App() {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        <div className="title">Mock System</div>
+        {isSubmitted ? 
+        <div>
+          User is successfully logged in
+          <div className="user-information">
+            <div className="user-info">
+              <b>Name:</b>{` ${userInformation.first_name} ${userInformation.last_name}`}
+            </div>
+            <div className="user-info">
+            <b>Age:</b>{` ${userInformation.age}`}
+            </div>
+            <div className="user-info">
+              <b>Date of Birth:</b>{` ${userInformation.dob}`}
+            </div>
+            <div className="user-info">
+              <b>Email:</b>{` ${userInformation.email}`}
+            </div>
+            <div className="user-info">
+              <b>Phone Number:</b>{` ${userInformation.phone_number}`}
+            </div>
+            <div className="user-info">
+              <b>Gender:</b>{` ${userInformation.gender}`}
+            </div>
+          </div>
+        </div>
+        
+        : renderForm}
       </div>
-      {isAuthenticated? <PopUp data={userInformation} toggle={togglePop} />: null}
+      {isAuthenticated? <PopUp data={userInformation}   toggle={toggleContinue} />: null}
     </div>
   );
 }

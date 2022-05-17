@@ -97,11 +97,11 @@
     background-color: white;
     position: absolute;
     top: 20%;
-   
+    text-align: center;
     width: 40%;
     padding: 20px;
     border-radius: 5px;
-    display: flex;
+    display: flexbox;
     align-items: center;
     align-content: center;
     justify-content: center;
