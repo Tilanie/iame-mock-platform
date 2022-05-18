@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import PopUp from "./PopUp"; 
+import IamePopUp from "./IamePopUp";
 
 import "./styles.css";
 
@@ -11,7 +12,8 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userInformation, setUserInformation] = useState({});
-
+  const [isIameSelected, setIsIameSelected] = useState(false); 
+  const [fetchingData, setFetchingData] = useState(false);
   // User Login info
   const database = [
     {
@@ -82,8 +84,14 @@ function App() {
   }
 
   async function login(){
+    setIsIameSelected(true);
+  }
+
+  async function loginHandler(){
+    setFetchingData(true)
     var response = await loginUsingIame()
-   
+    setIsIameSelected(false);
+    setFetchingData(false)
     if(response.authenticated){
       console.log(response.authData)
       setUserInformation(response.authData)
@@ -157,10 +165,10 @@ function App() {
             </div>
           </div>
         </div>
-        
         : renderForm}
       </div>
       {isAuthenticated? <PopUp data={userInformation}   toggle={toggleContinue} />: null}
+      {isIameSelected?  <IamePopUp data={userInformation} fetchingData={fetchingData}  handle={loginHandler} toggle={toggleContinue} />: null}
     </div>
   );
 }
